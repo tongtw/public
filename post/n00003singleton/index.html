@@ -75,6 +75,8 @@
     <li><a href="#no1-双重检查锁">No.1 双重检查锁</a></li>
     <li><a href="#no2-饿汉模式">No.2 饿汉模式</a></li>
     <li><a href="#no3-静态内部类">No.3 静态内部类</a></li>
+    <li><a href="#枚举">枚举</a></li>
+    <li><a href="#序列化">序列化</a></li>
   </ul>
 </nav>
 	</div>
@@ -209,6 +211,86 @@
 <p>静态内部类方式的优点：</p>
 <p>(1) 将实例的初始化延迟到第一次使用时;</p>
 <p>(2) 利用类加载机制保证了实例化过程的安全.</p>
+</blockquote>
+<blockquote>
+<p>破坏性的 reflect</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Constructor<span style="color:#f92672">&lt;</span>HungrySingle<span style="color:#f92672">&gt;</span> declaredConstructor <span style="color:#f92672">=</span> HungrySingle<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getDeclaredConstructor</span><span style="color:#f92672">();</span>
+declaredConstructor<span style="color:#f92672">.</span><span style="color:#a6e22e">setAccessible</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">);</span>
+HungrySingle hungrySingle_0 <span style="color:#f92672">=</span> declaredConstructor<span style="color:#f92672">.</span><span style="color:#a6e22e">newInstance</span><span style="color:#f92672">();</span>
+HungrySingle hungrySingle_1 <span style="color:#f92672">=</span> getInstance<span style="color:#f92672">();</span>
+System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>hungrySingle_0 <span style="color:#f92672">==</span> hungrySingle_1<span style="color:#f92672">);</span>  <span style="color:#75715e">// false
+</span></code></pre></div><blockquote>
+<p>以上三种实现方法存在的通病是： 容易被反射机制破坏单例性</p>
+</blockquote>
+<p>由测试结果可以看出，反射生成的实例是却别于<code>getInstance()</code>的新实例。</p>
+<blockquote>
+<p>实际上，反射机制使用了构造器创建一个新的实例，可以对构造函数进行进一步优化，在构造器中添加限制条件，以饿汉模式为例:</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HungrySingle</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> HungrySingle instance <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HungrySingle<span style="color:#f92672">();</span>
+    <span style="color:#75715e">// 添加限制条件，不允许被多次实例化
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">HungrySingle</span><span style="color:#f92672">(){</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>instance<span style="color:#f92672">!=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">){</span>
+            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> RuntimeException<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Multiple instantiations are not allowed...&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#75715e">/*
+</span><span style="color:#75715e">    public static HungrySingle getInstance() {
+</span><span style="color:#75715e">        return instance;
+</span><span style="color:#75715e">    }
+</span><span style="color:#75715e">    // 测试
+</span><span style="color:#75715e">    public static void main(String[] args) throws Exception{
+</span><span style="color:#75715e">        Constructor&lt;HungrySingle&gt; declaredConstructor = HungrySingle.class.getDeclaredConstructor();
+</span><span style="color:#75715e">        declaredConstructor.setAccessible(true);
+</span><span style="color:#75715e">        HungrySingle hungrySingle_0 = declaredConstructor.newInstance();
+</span><span style="color:#75715e">        HungrySingle hungrySingle_1 = getInstance();
+</span><span style="color:#75715e">        System.out.println(hungrySingle_0 == hungrySingle_1);
+</span><span style="color:#75715e">    }
+</span><span style="color:#75715e">    */</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h2 id="枚举">枚举</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> T <span style="color:#a6e22e">newInstance</span><span style="color:#f92672">(</span>Object <span style="color:#f92672">...</span> initargs<span style="color:#f92672">)</span>
+        <span style="color:#66d9ef">throws</span> InstantiationException<span style="color:#f92672">,</span> IllegalAccessException<span style="color:#f92672">,</span>
+               IllegalArgumentException<span style="color:#f92672">,</span> InvocationTargetException
+    <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(!</span>override<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(!</span>Reflection<span style="color:#f92672">.</span><span style="color:#a6e22e">quickCheckMemberAccess</span><span style="color:#f92672">(</span>clazz<span style="color:#f92672">,</span> modifiers<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+                Class<span style="color:#f92672">&lt;?&gt;</span> caller <span style="color:#f92672">=</span> Reflection<span style="color:#f92672">.</span><span style="color:#a6e22e">getCallerClass</span><span style="color:#f92672">();</span>
+                checkAccess<span style="color:#f92672">(</span>caller<span style="color:#f92672">,</span> clazz<span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">,</span> modifiers<span style="color:#f92672">);</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">((</span>clazz<span style="color:#f92672">.</span><span style="color:#a6e22e">getModifiers</span><span style="color:#f92672">()</span> <span style="color:#f92672">&amp;</span> Modifier<span style="color:#f92672">.</span><span style="color:#a6e22e">ENUM</span><span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> 0<span style="color:#f92672">)</span>
+            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> IllegalArgumentException<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Cannot reflectively create enum objects&#34;</span><span style="color:#f92672">);</span>
+        ConstructorAccessor ca <span style="color:#f92672">=</span> constructorAccessor<span style="color:#f92672">;</span>   <span style="color:#75715e">// read volatile
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>ca <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            ca <span style="color:#f92672">=</span> acquireConstructorAccessor<span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#a6e22e">@SuppressWarnings</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;unchecked&#34;</span><span style="color:#f92672">)</span>
+        T inst <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>T<span style="color:#f92672">)</span> ca<span style="color:#f92672">.</span><span style="color:#a6e22e">newInstance</span><span style="color:#f92672">(</span>initargs<span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">return</span> inst<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><p>上述代码描述了反射中<code>newInstance()</code>的执行逻辑，其中</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">if</span> <span style="color:#f92672">((</span>clazz<span style="color:#f92672">.</span><span style="color:#a6e22e">getModifiers</span><span style="color:#f92672">()</span> <span style="color:#f92672">&amp;</span> Modifier<span style="color:#f92672">.</span><span style="color:#a6e22e">ENUM</span><span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> 0<span style="color:#f92672">)</span>
+            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> IllegalArgumentException<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Cannot reflectively create enum objects&#34;</span><span style="color:#f92672">);</span>
+</code></pre></div><p>如果是枚举类型，则直接抛出异常，阻止反射机制创建类实例。另外，枚举本身就是单例的。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">enum</span> EnumSingleton <span style="color:#f92672">{</span>
+    INSTANCE<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">doSomething</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;doSomething&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>调用过程</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Main</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        Singleton<span style="color:#f92672">.</span><span style="color:#a6e22e">INSTANCE</span><span style="color:#f92672">.</span><span style="color:#a6e22e">doSomething</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><blockquote>
+<p>利用枚举的特性，让JVM来帮我们保证线程安全和单一实例的问题，直接通过Singleton.INSTANCE.doSomething()的方式调用即可。方便、简洁又安全。</p>
+</blockquote>
+<h2 id="序列化">序列化</h2>
+<blockquote>
 </blockquote>
 <p>》》》》》》》》》》 整理中 《《《《《《《《《《《《《《《《</p>
 		</div>
