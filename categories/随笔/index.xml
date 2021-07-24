@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>随笔 on TONGTWU</title>
+    <link>/categories/%E9%9A%8F%E7%AC%94/</link>
+    <description>Recent content in 随笔 on TONGTWU</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 21 Jul 2021 12:43:30 +0800</lastBuildDate><atom:link href="/categories/%E9%9A%8F%E7%AC%94/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>第一天，新的开始</title>
+      <link>/post/n00001new/</link>
+      <pubDate>Wed, 21 Jul 2021 12:43:30 +0800</pubDate>
+      
+      <guid>/post/n00001new/</guid>
+      <description>&lt;p&gt;这是我开始写博客的第一天，也是我开始参加工作的第一个月。&lt;/p&gt;
+&lt;p&gt;这也是一个从满怀憧憬走向现实的过程，参加了公司的入职培训和企业文化学习，这些是理想国，当然，我也认同。但是实际上对实质的工作内容并没有那么大的热情，做为一个学习了7年（本+硕）计算机专业的学生本来打算去创造世界，最终却在给“漏洞百出的世界”打杂，的确不免让人失望。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

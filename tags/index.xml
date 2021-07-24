@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on TONGTWU</title>
+    <link>/tags/</link>
+    <description>Recent content in Tags on TONGTWU</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 23 Jul 2021 23:12:00 +0800</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>理论</title>
+      <link>/tags/%E7%90%86%E8%AE%BA/</link>
+      <pubDate>Fri, 23 Jul 2021 23:12:00 +0800</pubDate>
+      
+      <guid>/tags/%E7%90%86%E8%AE%BA/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Git</title>
+      <link>/tags/git/</link>
+      <pubDate>Wed, 21 Jul 2021 14:44:13 +0800</pubDate>
+      
+      <guid>/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>实践</title>
+      <link>/tags/%E5%AE%9E%E8%B7%B5/</link>
+      <pubDate>Wed, 21 Jul 2021 14:44:13 +0800</pubDate>
+      
+      <guid>/tags/%E5%AE%9E%E8%B7%B5/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>随笔</title>
+      <link>/tags/%E9%9A%8F%E7%AC%94/</link>
+      <pubDate>Wed, 21 Jul 2021 12:43:30 +0800</pubDate>
+      
+      <guid>/tags/%E9%9A%8F%E7%AC%94/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
