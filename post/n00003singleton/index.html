@@ -59,8 +59,18 @@
 	</span>
 </div></div>
 		</header>
-<div class="post__toc toc">
-	<div class="toc__title">目录</div>
+<div id="my_toc" class="post__toc toc" style="width: 300px;
+position: fixed; top:50%; left: 90%;transform: translate(-50%,-50%);z-index:9999; display: none;"
+>
+	<div class="toc__title">
+		目录 
+		<a href="javascript://" 
+			onclick="document.getElementById('my_toc_btn').style.display='block'; document.getElementById('my_toc').style.display='none'"
+			style="color: grey; display: contents; text-align: right;"	
+		>
+			隐藏
+		</a>
+	</div> 
 	<div class="toc__menu">
 		<nav id="TableOfContents">
   <ul>
@@ -81,7 +91,20 @@
 </nav>
 	</div>
 </div>
-<div class="content post__content clearfix">
+
+<div id="my_toc_btn" 
+	onclick="document.getElementById('my_toc').style.display='block'; document.getElementById('my_toc_btn').style.display='none'"
+>
+	<a href="javascript://">
+		<div style="width: 50px; height: 50px; line-height: 50px; text-align: center; border-radius:50%; background-color: #e22d30; font-size: medium; color: white;
+		position:fixed; top: 80%; left: 90%;transform: translate(-50%,-50%);z-index:9999;
+		">
+			<p>目录</p>
+		</div>
+	</a>
+</div>
+
+ <div class="content post__content clearfix">
 			<p>单例模式（Singleton Pattern）是 Java 中最简单的设计模式之一。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。这种模式涉及到一个单一的类，该类负责创建自己的对象，同时确保只有单个对象被创建。这个类提供了一种访问其唯一的对象的方式，可以直接访问，不需要实例化该类的对象。</p>
 <h2 id="知识点">知识点</h2>
 <ol>

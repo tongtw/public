@@ -59,8 +59,18 @@
 	</span>
 </div></div>
 		</header>
-<div class="post__toc toc">
-	<div class="toc__title">目录</div>
+<div id="my_toc" class="post__toc toc" style="width: 300px;
+position: fixed; top:50%; left: 90%;transform: translate(-50%,-50%);z-index:9999; display: none;"
+>
+	<div class="toc__title">
+		目录 
+		<a href="javascript://" 
+			onclick="document.getElementById('my_toc_btn').style.display='block'; document.getElementById('my_toc').style.display='none'"
+			style="color: grey; display: contents; text-align: right;"	
+		>
+			隐藏
+		</a>
+	</div> 
 	<div class="toc__menu">
 		<nav id="TableOfContents">
   <ul>
@@ -76,7 +86,20 @@
 </nav>
 	</div>
 </div>
-<div class="content post__content clearfix">
+
+<div id="my_toc_btn" 
+	onclick="document.getElementById('my_toc').style.display='block'; document.getElementById('my_toc_btn').style.display='none'"
+>
+	<a href="javascript://">
+		<div style="width: 50px; height: 50px; line-height: 50px; text-align: center; border-radius:50%; background-color: #e22d30; font-size: medium; color: white;
+		position:fixed; top: 80%; left: 90%;transform: translate(-50%,-50%);z-index:9999;
+		">
+			<p>目录</p>
+		</div>
+	</a>
+</div>
+
+ <div class="content post__content clearfix">
 			<p>Git 是开发中常用的工具之一，它是一个开源的分布式版本控制系统，可以有效、高速地处理从很小到非常大的项目版本管理。Git 原本是 Linus Torvalds 为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件，但是现在广泛使用在项目开发过程中实现版本管理，本文常用命令整理。</p>
 <h2 id="init">init</h2>
 <p>创建新文件夹，打开，然后执行 <code>git init</code>以创建新的 git 仓库（初始化本仓库）。</p>
