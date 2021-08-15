@@ -35,8 +35,7 @@ $(document).ready(function () {
             if (rstMap.size > 0) {
                 var index = 1;
                 for (let link of rstMap.keys()) {
-                    rstHtml += String.format(line, index, link, rstMap.get(link));
-                    index += 1;
+                    rstHtml += String.format(line, index, link, rstMap.get(link))
                 }
                 $("#searchRst").html(rstHtml);
                 $("#searchRstArea").show();
