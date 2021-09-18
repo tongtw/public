@@ -8,8 +8,8 @@
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
 		<meta property="og:title" content="工厂方法模式" />
-<meta property="og:description" content="直接上demo
-interface product{ void method(); } class ProductA{ void method(){ System.out.println(&#34;ProductA.method....&#34;); } } class ProductB{ void method(){ System.out.println(&#34;ProductA.method....&#34;); } } abstract class Aplication{ void createInstance(); public Product getInstance(){ // ... 其它处理  Product product = createInstance(); // ... 其它处理  return product; } } class ConcreteProductA implements Aplication{ @override void createInstance(){ return ProductA(); } } class ConcreteProductB implements Aplication{ @override void createInstance(){ return ProductB(); } } public class FactoryTest{ public static void main(String[] args){ Aplication app = new ConcreteProductA(); Product product = app." />
+<meta property="og:description" content="工厂模式（Factory Pattern）是 Java 中最常用的设计模式之一。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。
+在工厂模式中，我们在创建对象时不会对客户端暴露创建逻辑，并且是通过使用一个共同的接口来指向新创建的对象。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/post/dpfactorymethod/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-09-19T02:24:35+08:00" />
@@ -18,8 +18,8 @@ interface product{ void method(); } class ProductA{ void method(){ System.out.pr
 
 		<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="工厂方法模式"/>
-<meta name="twitter:description" content="直接上demo
-interface product{ void method(); } class ProductA{ void method(){ System.out.println(&#34;ProductA.method....&#34;); } } class ProductB{ void method(){ System.out.println(&#34;ProductA.method....&#34;); } } abstract class Aplication{ void createInstance(); public Product getInstance(){ // ... 其它处理  Product product = createInstance(); // ... 其它处理  return product; } } class ConcreteProductA implements Aplication{ @override void createInstance(){ return ProductA(); } } class ConcreteProductB implements Aplication{ @override void createInstance(){ return ProductB(); } } public class FactoryTest{ public static void main(String[] args){ Aplication app = new ConcreteProductA(); Product product = app."/>
+<meta name="twitter:description" content="工厂模式（Factory Pattern）是 Java 中最常用的设计模式之一。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。
+在工厂模式中，我们在创建对象时不会对客户端暴露创建逻辑，并且是通过使用一个共同的接口来指向新创建的对象。"/>
 
 
 	<link rel="stylesheet" href="/css/style.css">
@@ -87,7 +87,9 @@ position: fixed; top: 50%; left: 90%; transform: translate(-50%,-50%); z-index:9
 </div>
 
  <div class="content post__content clearfix">
-			<p>直接上demo</p>
+			<p>工厂模式（Factory Pattern）是 Java 中最常用的设计模式之一。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。</p>
+<p>在工厂模式中，我们在创建对象时不会对客户端暴露创建逻辑，并且是通过使用一个共同的接口来指向新创建的对象。</p>
+<p>直接上demo</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">product</span><span style="color:#f92672">{</span>
     <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">method</span><span style="color:#f92672">();</span>
 <span style="color:#f92672">}</span>

@@ -13,8 +13,8 @@
       <pubDate>Sun, 19 Sep 2021 02:24:35 +0800</pubDate>
       
       <guid>/post/dpfactorymethod/</guid>
-      <description>直接上demo
-interface product{ void method(); } class ProductA{ void method(){ System.out.println(&amp;#34;ProductA.method....&amp;#34;); } } class ProductB{ void method(){ System.out.println(&amp;#34;ProductA.method....&amp;#34;); } } abstract class Aplication{ void createInstance(); public Product getInstance(){ // ... 其它处理  Product product = createInstance(); // ... 其它处理  return product; } } class ConcreteProductA implements Aplication{ @override void createInstance(){ return ProductA(); } } class ConcreteProductB implements Aplication{ @override void createInstance(){ return ProductB(); } } public class FactoryTest{ public static void main(String[] args){ Aplication app = new ConcreteProductA(); Product product = app.</description>
+      <description>&lt;p&gt;工厂模式（Factory Pattern）是 Java 中最常用的设计模式之一。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。&lt;/p&gt;
+&lt;p&gt;在工厂模式中，我们在创建对象时不会对客户端暴露创建逻辑，并且是通过使用一个共同的接口来指向新创建的对象。&lt;/p&gt;</description>
     </item>
     
     <item>
